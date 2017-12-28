@@ -6,7 +6,7 @@ GOLD = 1
 
 class Door(object):
     """
-    Object to simulate a door in the mony hall game
+    Object to simulate a door in the monty hall game
     """
     def __init__(self, value):
         self.value = value
