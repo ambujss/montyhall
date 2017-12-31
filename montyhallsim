@@ -85,14 +85,15 @@ class Player(object):
         return self.selections.pop()
 
 
-
-def game(strategy, player):
+def game(player):
     """
-    game(strategy, player) palys one instance of the monty
+    game(player) palys one instance of the monty
     hall game with the given player
     """
     mh = MontyHall()
     return mh.play(player)
+
+# -----------------------------------------------------------------------------------------
 
 def test_strategy(runs, strategy):
     """
@@ -102,7 +103,7 @@ def test_strategy(runs, strategy):
     player = Player(strategy)
     print "Running %s strategy"%strategy
     for i in xrange(runs):
-        success = success + game(strategy, player)
+        success = success + game(player)
         player.reset()
     print "Number of runs : %d\n Successes : %d, Failures : %d\n Success rate : %f" \
         % (runs, success, runs-success, float(success)/float(runs))
