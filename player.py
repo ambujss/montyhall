@@ -6,7 +6,7 @@ CHANGE = "Change"
 class _Player(object):
     """
     Base class for a Monty Hall Player. Implement the `second_choice`
-    method in the base class to implement specific strategies"
+    method in the child class to implement specific strategies"
     """
     def __init__(self):
         self.reset()
