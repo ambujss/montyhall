@@ -5,11 +5,8 @@ CHANGE = "Change"
 
 class _Player(object):
     """
-    A Player that can play the monty hall game. The player is
-    initialized with a strategy, CHANGE or NOCHANGE. With the CHANGE
-    strategy, the player will always change their pick after the
-    door with the goat is revelaed. With NOCHANGE, the player will
-    always stick to its original selection.
+    Base class for a Monty Hall Player. Implement the `second_choice`
+    method in the base class to implement specific strategies"
     """
     def __init__(self):
         self.reset()
@@ -33,6 +30,10 @@ class _Player(object):
         raise NotImplementedError("method second_choice not implemented")
 
 class PlayerChange(_Player):
+    """
+    A Player that will always change its pick to the unopened door
+    when asked by the host.
+    """
     def __init__(self):
         super(PlayerChange, self).__init__()
 
@@ -40,6 +41,9 @@ class PlayerChange(_Player):
         return self.selections.pop()
 
 class PlayerNoChange(_Player):
+    """
+    A Player that will always stick with its original pick.
+    """
     def __init__(self):
         super(PlayerNoChange, self).__init__()
 
