@@ -1,5 +1,5 @@
 # montyhall
-A small python program to simulate the monty hall problem
+A small python (2.7) program to simulate the monty hall problem
 
 ```
 usage: montyhallsim [-h] [--plot] [--export FILENAME] runs
@@ -36,3 +36,6 @@ Number of runs : 100
  --------
 ```
 
+Note: Running this program requires the `matplotlib` library.
+Please see instructions on how to install `matplotlib` here :
+https://matplotlib.org/users/installing.html
