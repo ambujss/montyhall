@@ -36,6 +36,6 @@ Number of runs : 100
  --------
 ```
 
-Note: Running this program requires the `matplotlib` library.
+Note: This program requires the `matplotlib` library.
 Please see instructions on how to install `matplotlib` here :
 https://matplotlib.org/users/installing.html
