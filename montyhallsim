@@ -1,20 +1,59 @@
 #!/usr/bin/env python
 import argparse
 import montyhall
-from montyhall import NOCHANGE, CHANGE
+import player
+from player import NOCHANGE, CHANGE
+import plotutils
+
+def test_strategy(runs, strategy, plot=False):
+    """
+    Test a partticular strategy over a given number of runs.
+    """
+    success = 0
+    p1 = player.new(strategy)
+    print "Running %s strategy"%strategy
+    running_success_rates = []
+    for i in xrange(runs):
+        success = success + montyhall.play_a_game(p1)
+        if plot:
+            running_success_rates.append(float(success)/float(i+1))
+        p1.reset()
+    print "Number of runs : %d\n Successes : %d, Failures : %d\n Success rate : %f" \
+        % (runs, success, runs-success, float(success)/float(runs))
+    if plot:
+        return running_success_rates
 
 def run():
     parser = argparse.ArgumentParser(description="Monty Hall Problem Simulator")
-    parser.add_argument('runs', type=int, help='Number of iterations')
+    parser.add_argument("runs", type=int, help="Number of iterations")
+    parser.add_argument("--plot", action="store_true", help="Generate and show a plot")
+    parser.add_argument("--export", metavar="FILENAME",
+                        help="Generate and save a plot to FILENAME")
+
 
     args = parser.parse_args()
-    runs = args.runs
 
-    print ""
-    montyhall.test_strategy(runs, NOCHANGE)
+    runs = args.runs
+    plot = args.plot
+    export = args.export
+
+    print "",runs,plot,export
+    ncdata = test_strategy(runs, NOCHANGE, plot=plot or export)
     print " ======== \n"
-    montyhall.test_strategy(runs, CHANGE)
+    cdata = test_strategy(runs, CHANGE, plot=plot or export)
     print " -------- "
+    if plot or export:
+        plotter = plotutils.Plotter(1, runs, "Numberof games", "Success rate")
+        nc_thlimit = 1.0/3.0
+        c_thlimit = 2.0/3.0
+        plotter.add_plot(ncdata, color="blue",
+                         label="Don't Switch Choice Strategy",
+                         theoretical_limit=nc_thlimit)
+        plotter.add_plot(cdata, color="orange",
+                         label="Switch Choice Strategy",
+                         theoretical_limit=c_thlimit)
+        plotter.add_yticks(plotutils.float_range(0, 1, 0.2) + [nc_thlimit, c_thlimit])
+        plotter.plot(show_plot=plot, export_file=export)
 
 if __name__ == "__main__":
     run()
