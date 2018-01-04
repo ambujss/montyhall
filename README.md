@@ -1,12 +1,25 @@
 # montyhall
 A small python program to simulate the monty hall problem
 
-Usage: `./montyhallsim <number of iterations>`
+```
+usage: montyhallsim [-h] [--plot] [--export FILENAME] runs
+
+Monty Hall Problem Simulator
+
+positional arguments:
+  runs               Number of iterations
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --plot             Generate and show a plot
+  --export FILENAME  Generate and save a plot to FILENAME
+```
 
 Upon running, the program will run through the provided number of iterations
 for both strategies of the monty hall problem: changing your original pick, and
 not changing your original pick. Upon completion, a report will be presented
-to the user. An example is provided below:
+to the user. The user can also generate plots of sucess rates vs. number of
+runs using the `--plot` and `--export` flags.
 
 ```
 $./montyhallsim 100
